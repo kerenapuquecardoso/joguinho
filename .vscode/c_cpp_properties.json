@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-clang-x64",
+            "compilerArgs": [
+                "C:\\SDL2\\SDL2-devel-2.0.12-mingw\\SDL2–2.0.12\\x86_64-w64-mingw32\\include"
+            ]
+        }
+    ],
+    "version": 4
+}
