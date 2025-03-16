@@ -1,15 +1,19 @@
 #include <iostream>
 
-
 class Object
 {
-    //
+	public:
+		Object(float p_x, float p_y);
+    private: 
+		float x, y;
+		int width, height;
 };
 
 	class StaticObject : public Object
 	{
 		//
 	};
+
 
 		class Wall : public StaticObject
 		{
