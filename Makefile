@@ -6,7 +6,7 @@ CPP = g++
 
 BIN = last-outpost.exe
 
-CPPFLAGS = -std=c++23 -Wall -g -I./include -DMYGLIB_FP_TYPE=float
+CPPFLAGS = -std=c++23 -Wall -g -I./include -I../my-lib/include 
 LDFLAGS = -std=c++23
 
 # ----------------------------------
