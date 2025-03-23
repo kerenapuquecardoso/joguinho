@@ -4,16 +4,20 @@
 #include <SDL2/SDL_image.h>
 
 #include "RenderWindow.hpp"
+#include "Object.hpp"
 int main(int argv, char** args)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Event event;
     RenderWindow window("Joguinho", 1280, 720);
+
+    SDL_Texture* grassTexture = window.loadTexture("resources/graphics/image.png");
+    
+    Object bob;
+
     bool isRunning = true;
     // aqui deve ser instanciado o personagem
     // essas variaveis deverão ser o atributo da Classe Objeto
-    float personX = 80;
-    float personY = 300;
     float personWidth = 32;
     float personHeight = 32;
     bool isJumping = false, left = false, right = false;
@@ -56,17 +60,9 @@ int main(int argv, char** args)
                 }
             }
 
-
-            if (left)
-            {
-                personX -= 1;
-            }
-            if (right)
-            {
-                personX += 1;
-            }
-            //essa parte vai ter que ficar em um arquivo separado
-            //Aqui tenho que chamar a renderização de cada objeto
+           window.clear();
+           window.render(grassTexture);
+           window.display();
             
         }
     }
