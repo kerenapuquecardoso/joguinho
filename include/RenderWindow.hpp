@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "Object.hpp"
 class RenderWindow 
 {
     public:
@@ -8,9 +9,9 @@ class RenderWindow
         SDL_Texture* loadTexture(const char* p_filePath);
         void cleanUp();
         void clear();
-        void render(SDL_Texture* p_texture);
+        void renderBackground(SDL_Texture* p_texture);
+        void renderRectangle(SDL_Texture* p_texture, SDL_Rect p_rect);
         void display();
-        //SDL_Renderer* getRenderer();
     private: 
         SDL_Window *window;
         SDL_Renderer *renderer;

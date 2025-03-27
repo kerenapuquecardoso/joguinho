@@ -7,19 +7,20 @@
 #include "Object.hpp"
 int main(int argv, char** args)
 {
+    //calcular o delta T, tempo de execução para ser o valor de atualização dos objetos
+    // (velocidade * delta t ) + posição = nova posição
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Event event;
     RenderWindow window("Joguinho", 1280, 720);
-
     SDL_Texture* grassTexture = window.loadTexture("resources/graphics/image.png");
     
-    Object bob;
+    //Object bob(Point(150, 352), grassTexture);
 
     bool isRunning = true;
     // aqui deve ser instanciado o personagem
-    // essas variaveis deverão ser o atributo da Classe Objeto
-    float personWidth = 32;
-    float personHeight = 32;
+    // essas variaveis deverão ser o atributo da Classe Object
+    // float personWidth = 32;
+    // float personHeight = 32;
     bool isJumping = false, left = false, right = false;
 
     while (isRunning)
@@ -61,7 +62,8 @@ int main(int argv, char** args)
             }
 
            window.clear();
-           window.render(grassTexture);
+           window.renderBackground(grassTexture);
+           window.renderRectangle(grassTexture, SDL_Rect{255, 0, 255, 255});
            window.display();
             
         }

@@ -1,12 +1,23 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+// #include <SDL2/SDL.h>
+// #include <SDL2/SDL_image.h>
 
-#include "Objeto.hpp"
+// #include "Object.hpp"
 
-Objeto::Objeto(float p_x, float p_y, SDL_Texture* p_texture): x(p_x), y(p_y)
-{
-    currentFrame.x = 0;
-    currentFrame.y = 0;
-    currentFrame.w = 32;
-    currentFrame.h = 32;
-}
+// #include <my-lib/math-vector.h>
+// using Vector = Mylib::Math::Vector<float, 2>;
+// using Point = Vector;
+
+// Object::Object(Point p_position, SDL_Texture* p_texture): position(p_position), texture(p_texture)
+// {
+//     // chamar a renderização do objeto
+// }
+
+// Point Object::getPosition()
+// {
+//     return position;
+// }
+
+// SDL_Texture* Object::getTexture()
+// {
+//     return texture;
+// }

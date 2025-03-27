@@ -1,0 +1,25 @@
+# Arquivos de compilação
+Makefile
+build/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# Arquivos gerados
+*.out
+*.slo
+*.lo
+*.ilk
+*.pdb
+
+# Dependências
+deps/
+vendor/
+
+# IDE/Editores
+.vscode/
+.idea/
+*.swp
+*~

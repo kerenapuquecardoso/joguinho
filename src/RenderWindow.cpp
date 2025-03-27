@@ -4,6 +4,8 @@
 
 #include "RenderWindow.hpp"
 
+#include "Object.hpp"
+
 RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h)
     :window(NULL), renderer(NULL)
 {
@@ -36,11 +38,16 @@ void RenderWindow::clear()
     SDL_RenderClear(renderer);
 }
 
-void RenderWindow::render(SDL_Texture* p_texture)
+void RenderWindow::renderBackground(SDL_Texture* p_texture) 
 {
-    SDL_Rect src;
     SDL_RenderCopy(renderer, p_texture, NULL, NULL);
 }
+
+void RenderWindow::renderRectangle(SDL_Texture* p_texture, SDL_Rect p_rect)
+{
+    SDL_RenderFillRect(renderer, &p_rect);
+}
+
 
 void RenderWindow::display()
 {
