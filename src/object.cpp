@@ -1,23 +1,19 @@
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_image.h>
+#include "Object.h"
 
-// #include "Object.hpp"
+namespace Joguinho
+{
+    Object::Object(Point position, Vector size, SDL_Texture* texture)
+        : position(position), size(size), texture(texture)
+    {
+    }
 
-// #include <my-lib/math-vector.h>
-// using Vector = Mylib::Math::Vector<float, 2>;
-// using Point = Vector;
+    void StaticObject::renderer()
+    {
+        std::cout << "StaticObject created at position: " << position.x << ", " << position.y << std::endl;
+    }
 
-// Object::Object(Point p_position, SDL_Texture* p_texture): position(p_position), texture(p_texture)
-// {
-//     // chamar a renderização do objeto
-// }
-
-// Point Object::getPosition()
-// {
-//     return position;
-// }
-
-// SDL_Texture* Object::getTexture()
-// {
-//     return texture;
-// }
+    void DynamicObject::renderer()
+    {
+        std::cout << "DynamicObject created at position: " << position.x << ", " << position.y << std::endl;
+    }
+}
