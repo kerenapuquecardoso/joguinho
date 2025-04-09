@@ -54,4 +54,8 @@ namespace Joguinho
     {
         SDL_RenderPresent(renderer);
     }
+
+    SDL_Renderer* RenderWindow::getRenderer() {
+        return renderer;
+    }
 }

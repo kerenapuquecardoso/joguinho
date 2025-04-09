@@ -9,11 +9,11 @@ namespace Joguinho
 
     void StaticObject::renderer()
     {
-        std::cout << "StaticObject created at position: " << position.x << ", " << position.y << std::endl;
+        std::cout << "StaticObject created at position: " << position << std::endl;
     }
 
     void DynamicObject::renderer()
     {
-        std::cout << "DynamicObject created at position: " << position.x << ", " << position.y << std::endl;
+        std::cout << "DynamicObject created at position: " << position << std::endl;
     }
 }

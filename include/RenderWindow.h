@@ -11,6 +11,7 @@ namespace Joguinho {
             void clear();
             void renderBackground(SDL_Texture* p_texture);
             void renderRectangle(SDL_Rect p_rect);
+            SDL_Renderer* getRenderer();
             void display();
         private: 
             SDL_Window *window;
