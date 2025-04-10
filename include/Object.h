@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 #include <SDL2/SDL.h>
@@ -10,15 +11,12 @@ namespace Joguinho
 	{
 	public:
 		Object(Point position, Vector size, SDL_Texture *texture);
-		Point getPosition();
-		Vector getSize();
-
 		virtual void render() = 0;
 
 	protected:
-		Point position;
-		Vector size;
-		SDL_Texture *texture;
+		Point mPosition;
+		Vector mSize;
+		SDL_Texture *mTexture;
 	};
 
 	class StaticObject : public Object
@@ -34,11 +32,11 @@ namespace Joguinho
 	{
 	public:
 		DynamicObject(const Point position, const Vector size, SDL_Texture *texture, const Vector velocity)
-		 : Object(position, size,  texture), velocity(velocity) {}
+		 : Object(position, size,  texture), mVelocity(velocity) {}
 		virtual ~DynamicObject() = default;
 		void renderer();
 	protected:
-		Vector velocity;
+		Vector mVelocity;
 	};
 }
 

@@ -1,60 +1,60 @@
 #include <iostream>
+#include <utility>
 
 #include "Character.h"
+#include "Object.h"
+
 
 namespace Joguinho
 {
+    void Character::render()  
+    {
+        SDL_Rect rect = {static_cast<int>(mPosition.x), static_cast<int>(mPosition.y),
+                         static_cast<int>(mSize.x), static_cast<int>(mSize.y)};
+        std::cout << "RENDERIZOUUUUUU AQUI, NA position: " << mPosition.x << ", " << mPosition.y << std::endl;
+    }
     void Character::updateCharacter()
     {
-        if (moveToRight)
-            velocity.x += 0.5f;
-        if (moveToLeft)
-            velocity.y -= 0.5f;
-        position = Vector(velocity.x, velocity.y);
-    }
+        if (mMoveToRight)
+            mVelocity.x += 0.5f;
+        if (mMoveToLeft)
+            mVelocity.y -= 0.5f;
+        mPosition = Vector(mVelocity.x, mVelocity.y);
+    };
 
-    void Character::verifyKeyboard(SDL_Event event)
+    void Character::verifyKeyboard(SDL_Event& event)
     {
         if (event.type == SDL_KEYDOWN)
         {
-            if (event.key.keysym.sym == SDLK_LEFT)
+            if (event.key.keysym.sym == this->mMyKeys[ std::to_underlying(Button::Left) ])
             {
-                moveToLeft = true;
+                mMoveToLeft = true;
+                std::cout << "LEFT" << std::endl;
+
             }
-            if (event.key.keysym.sym == SDLK_RIGHT)
+            if (event.key.keysym.sym == this->mMyKeys[ std::to_underlying(Button::Right) ])
             {
-                moveToRight = true;
-            }
-            if (event.key.keysym.sym == SDLK_a)
-            {
-                moveToLeft = true;
-            }
-            if (event.key.keysym.sym == SDLK_d)
-            {
-                moveToRight = true;
+                mMoveToRight = true;
+                std::cout << "RIGHT" << std::endl;
             }
         }
         else if (event.type == SDL_KEYUP)
         {
-            if (event.key.keysym.sym == SDLK_LEFT)
+            if (event.key.keysym.sym == this->mMyKeys[ std::to_underlying(Button::Left) ])
             {
-                moveToLeft = false;
+                mMoveToLeft = false;
+
             }
-            if (event.key.keysym.sym == SDLK_RIGHT)
+            if (event.key.keysym.sym == this->mMyKeys[ std::to_underlying(Button::Right) ])
             {
-                moveToRight = false;
-            }
-            if (event.key.keysym.sym == SDLK_a)
-            {
-                moveToLeft = false;
-            }
-            if (event.key.keysym.sym == SDLK_d)
-            {
-                moveToRight = false;
+                mMoveToRight = false;
             }
         }
+    };
+
+    Character::~Character()
+    {
+        std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
     }
-
-
 }
 
