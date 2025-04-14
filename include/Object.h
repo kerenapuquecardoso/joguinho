@@ -13,6 +13,18 @@ namespace Joguinho
 		Object(Point position, Vector size, SDL_Texture *texture);
 		virtual void render() = 0;
 
+		void setPosition(Point position){
+			mPosition = position;
+		}
+
+		Vector getPosition() {
+			return mPosition;
+		}
+
+		Vector getSize(){
+			return mSize;
+		}
+
 	protected:
 		Point mPosition;
 		Vector mSize;
@@ -35,6 +47,15 @@ namespace Joguinho
 		 : Object(position, size,  texture), mVelocity(velocity) {}
 		virtual ~DynamicObject() = default;
 		void renderer();
+
+		Vector getVelocity() {
+			return mVelocity;
+		}
+
+		void setVelocity(const Vector& velocity) {
+			mVelocity = velocity;
+		}
+
 	protected:
 		Vector mVelocity;
 	};
