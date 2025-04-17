@@ -52,7 +52,6 @@ int main(int argc, char **argv)
             100
         };
         window.renderRectangle(characterRect);
-        tom.gravity();
         
         window.display();
         

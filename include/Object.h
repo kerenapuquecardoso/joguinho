@@ -56,10 +56,6 @@ namespace Joguinho
 			mVelocity = velocity;
 		}
 
-		void gravity() {
-			this->setPosition(this->getPosition() - (Vector(0.0f, -5.0f)));
-		}
-
 	protected:
 		Vector mVelocity;
 	};
