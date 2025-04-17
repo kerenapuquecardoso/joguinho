@@ -37,7 +37,7 @@ namespace Joguinho
 		StaticObject(const Point position, const Vector size, SDL_Texture *texture)
 			: Object(position, size,  texture) {}
 		virtual ~StaticObject() = default;
-		void renderer();
+		void render() override;
 	};
 
 	class DynamicObject : public Object
@@ -54,6 +54,10 @@ namespace Joguinho
 
 		void setVelocity(const Vector& velocity) {
 			mVelocity = velocity;
+		}
+
+		void gravity() {
+			this->setPosition(this->getPosition() - (Vector(0.0f, -5.0f)));
 		}
 
 	protected:
