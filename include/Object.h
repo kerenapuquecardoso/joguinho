@@ -24,6 +24,9 @@ namespace Joguinho
 		Vector getSize(){
 			return mSize;
 		}
+		SDL_Texture* getTexture(){
+			return mTexture;
+		}
 
 	protected:
 		Point mPosition;

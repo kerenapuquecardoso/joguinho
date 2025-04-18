@@ -32,17 +32,20 @@ int main(int argc, char **argv)
             tom.verifyKeyboard(event);
         }
 
-        tom.updateCharacter();
-
-        window.clear();
-        window.renderBackground(backgroundTexture);
         
+        window.clear();
+        tom.updateCharacter(0.0f);
+        window.renderBackground(backgroundTexture);
+        SDL_Rect abstractRect = {
+            0, 500, 1280, 100
+        };
         SDL_Rect characterRect = {
             static_cast<int>(tom.getPosition().x),
             static_cast<int>(tom.getPosition().y),
             100,
             100
         };
+        window.renderRectangle(abstractRect);
         window.renderRectangle(characterRect);
         
         window.display();

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 
+#include "VariableGlobal.h"
 #include "Character.h"
 #include "Object.h"
 
@@ -19,10 +20,10 @@ namespace Joguinho
                         // static_cast<int>(mSize.x), static_cast<int>(mSize.y)};
         //std::cout << "RENDERIZOUUUUUU AQUI, NA position: " << mPosition.x << ", " << mPosition.y << std::endl;
     }
-    void Character::updateCharacter()
+    void Character::updateCharacter(float deltaTime)
     {
-        Vector velocity = getVelocity();
-		Vector position = getPosition();
+        Vector velocity = getVelocity() + deltaTime;
+		Vector position = getPosition() - Vector(0.0f, gravity);
 
 		position += velocity;
 
