@@ -7,10 +7,10 @@ namespace Joguinho
     {
     }
 
-    void StaticObject::renderer()
-    {
-        std::cout << "StaticObject created at position: " << mPosition << std::endl;
-    }
+    // void StaticObject::renderer()
+    // {
+    //     std::cout << "StaticObject created at position: " << mPosition << std::endl;
+    // }
 
     void DynamicObject::renderer()
     {

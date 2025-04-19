@@ -6,6 +6,7 @@
 #include "RenderWindow.h"
 #include "Character.h"
 #include "Object.h"
+#include "Collider.h"
 
 int main(int argc, char **argv)
 {
@@ -18,10 +19,17 @@ int main(int argc, char **argv)
 
     Joguinho::Character tom({100, 100}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});
     
+    std::list<Joguinho::Platform> platforms;
+    platforms.emplace_back(Point{0, 500}, Vector{1280, 100}, backgroundTexture);
+
     bool isRunning = true;
     while (isRunning)
     {
         
+           
+        Joguinho::resolveCollision(tom, platforms);
+        
+       
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
@@ -36,16 +44,22 @@ int main(int argc, char **argv)
         window.clear();
         tom.updateCharacter(0.0f);
         window.renderBackground(backgroundTexture);
-        SDL_Rect abstractRect = {
-            0, 500, 1280, 100
-        };
+        for (auto& platform : platforms)
+        {
+            SDL_Rect plataformRect = {
+                static_cast<int>(platform.getPosition().x),
+                static_cast<int>(platform.getPosition().y),
+                static_cast<int>(platform.getSize().x),
+                static_cast<int>(platform.getSize().y)
+            };
+            window.renderRectangle(plataformRect);
+        }
         SDL_Rect characterRect = {
             static_cast<int>(tom.getPosition().x),
             static_cast<int>(tom.getPosition().y),
             100,
             100
         };
-        window.renderRectangle(abstractRect);
         window.renderRectangle(characterRect);
         
         window.display();

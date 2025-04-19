@@ -40,7 +40,7 @@ namespace Joguinho
 		StaticObject(const Point position, const Vector size, SDL_Texture *texture)
 			: Object(position, size,  texture) {}
 		virtual ~StaticObject() = default;
-		void renderer();
+		//void renderer();
 	};
 
 	class DynamicObject : public Object
