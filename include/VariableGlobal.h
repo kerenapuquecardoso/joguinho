@@ -1,2 +1,3 @@
-float deltaTime = 0.0f;
+
+float deltaTime;
 const float gravity = 1.0f;

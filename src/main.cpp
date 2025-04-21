@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "Object.h"
 #include "Collider.h"
+// #include "VariableGlobal.h"
 
 int main(int argc, char **argv)
 {
@@ -20,13 +21,21 @@ int main(int argc, char **argv)
     Joguinho::Character tom({100, 100}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});
     
     std::list<Joguinho::Platform> platforms;
-    platforms.emplace_back(Point{0, 500}, Vector{1280, 100}, backgroundTexture);
+    platforms.emplace_back(Point{0, 330}, Vector{780, 100}, backgroundTexture);
+    platforms.emplace_back(Point{0, 550}, Vector{1280, 100}, backgroundTexture);
+
+
+    uint32_t currentTime = SDL_GetPerformanceCounter();
+    uint32_t lastTime = 0;
 
     bool isRunning = true;
     while (isRunning)
     {
+        lastTime = currentTime;
+        currentTime = SDL_GetPerformanceCounter();
         
-           
+        float preDeltaTime = float((currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency());
+        float deltaTime = preDeltaTime / 100;   
         Joguinho::resolveCollision(tom, platforms);
         
        
@@ -42,7 +51,8 @@ int main(int argc, char **argv)
 
         
         window.clear();
-        tom.updateCharacter(0.0f);
+        std::cout << "DELTA TIME: " << deltaTime << std::endl;
+        tom.updateCharacter(deltaTime);
         window.renderBackground(backgroundTexture);
         for (auto& platform : platforms)
         {
