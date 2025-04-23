@@ -22,9 +22,8 @@ namespace Joguinho
 			SDL_Texture* texture,
 			std::array<SDL_Keycode, 3> myKeys); 
         ~Character();
-        SDL_Texture* getTexture() { return mTexture; }
         void render();
-        void updateCharacter();
+        void updateCharacter(float deltaTime);
         void verifyKeyboard(SDL_Event& event);
 
     protected:

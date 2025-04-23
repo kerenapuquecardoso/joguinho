@@ -53,6 +53,7 @@
 		"typeinfo": "cpp",
 		"variant": "cpp",
 		"cstdarg": "cpp",
-		"cinttypes": "cpp"
+		"cinttypes": "cpp",
+		"list": "cpp"
 	}
 }
