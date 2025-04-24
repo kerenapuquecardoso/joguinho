@@ -6,10 +6,8 @@ namespace Joguinho
     {
 		std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
     }
-    void Platform::render()
+    void Platform::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
     {
-        // SDL_Rect rect = {static_cast<int>(mPosition.x), static_cast<int>(mPosition.y),
-        //  static_cast<int>(mSize.x), static_cast<int>(mSize.y)};
-        // std::cout << "RENDERIZOUUUUUU AQUI, NA position: " << mPosition.x << ", " << mPosition.y << std::endl;
+		SDL_RenderFillRect(renderer, &p_rect);	
     }
 }

@@ -7,6 +7,6 @@ namespace Joguinho
         Platform(const Point position, const Vector size, SDL_Texture *texture)
             : StaticObject(position, size, texture) {}
         ~Platform();
-        void render();
+        void render(SDL_Renderer* renderer, SDL_Rect& p_rect);
     };
 }
