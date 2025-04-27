@@ -49,7 +49,6 @@ namespace Joguinho
 		DynamicObject(const Point position, const Vector size, SDL_Texture *texture, const Vector velocity)
 		 : Object(position, size,  texture), mVelocity(velocity) {}
 		virtual ~DynamicObject() = default;
-		void renderer();
 
 		Vector getVelocity() {
 			return mVelocity;

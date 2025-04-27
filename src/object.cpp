@@ -6,14 +6,4 @@ namespace Joguinho
         : mPosition(position), mSize(size), mTexture(texture)
     {
     }
-
-    // void StaticObject::renderer()
-    // {
-    //     std::cout << "StaticObject created at position: " << mPosition << std::endl;
-    // }
-
-    void DynamicObject::renderer()
-    {
-        std::cout << "DynamicObject created at position: " << mPosition << std::endl;
-    }
 }
