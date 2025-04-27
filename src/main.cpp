@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     Joguinho::Character tom({100, 100}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});
     
     std::list<Joguinho::Platform> platforms;
+    platforms.emplace_back(Point{250, 130}, Vector{780, 80}, backgroundTexture);
     platforms.emplace_back(Point{0, 330}, Vector{780, 100}, backgroundTexture);
     platforms.emplace_back(Point{0, 550}, Vector{1280, 100}, backgroundTexture);
 
