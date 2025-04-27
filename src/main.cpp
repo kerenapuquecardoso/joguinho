@@ -15,6 +15,7 @@ int main(int argc, char **argv)
     SDL_Event event;
     Joguinho::RenderWindow window("Joguinho", 1280, 720);
 
+
     SDL_Texture *backgroundTexture = window.loadTexture("resources/graphics/image.png");
     SDL_Texture *characterTexture = window.loadTexture("resources/graphics/tom.png");
 
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
                 static_cast<int>(platform.getSize().x),
                 static_cast<int>(platform.getSize().y)
             };
-            window.renderRectangle(plataformRect);
+			platform.render(window.getRenderer(), plataformRect);
         }
         SDL_Rect characterRect = {
             static_cast<int>(tom.getPosition().x),
@@ -71,8 +72,8 @@ int main(int argc, char **argv)
             100,
             100
         };
-
-        window.renderRectangle(characterRect);
+		tom.render(window.getRenderer(), characterRect);
+        
         window.display();
         
         SDL_Delay(16); 

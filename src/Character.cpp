@@ -5,6 +5,7 @@
 #include "Character.h"
 #include "Object.h"
 
+
 namespace Joguinho
 
 {
@@ -18,11 +19,9 @@ namespace Joguinho
 		std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
 	}
 
-	void Character::render()
+	void Character::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
 	{
-		// SDL_Rect rect = {static_cast<int>(mPosition.x), static_cast<int>(mPosition.y),
-		//  static_cast<int>(mSize.x), static_cast<int>(mSize.y)};
-		// std::cout << "RENDERIZOUUUUUU AQUI, NA position: " << mPosition.x << ", " << mPosition.y << std::endl;
+		SDL_RenderFillRect(renderer, &p_rect);
 	}
 
 	void Character::updateCharacter(float deltaTime)
