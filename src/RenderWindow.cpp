@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "RenderWindow.h"
-
+#include "VariableGlobal.h"
 #include "Object.h"
 
 namespace Joguinho
@@ -16,13 +16,13 @@ namespace Joguinho
         {
             std::cout << "Window failed to init. Error: " << SDL_GetError() << std::endl;
         }
-        mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+        renderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
     }
 
     SDL_Texture *RenderWindow::loadTexture(const char *p_filePath)
     {
         SDL_Texture *texture = NULL;
-        texture = IMG_LoadTexture(mRenderer, p_filePath);
+        texture = IMG_LoadTexture(renderer, p_filePath);
         if (texture == NULL)
         {
             std::cout << "Failed to load texture. Error: " << SDL_GetError() << std::endl;
@@ -38,25 +38,25 @@ namespace Joguinho
 
     void RenderWindow::clear()
     {
-        SDL_RenderClear(mRenderer);
+        SDL_RenderClear(renderer);
     }
 
     void RenderWindow::renderBackground(SDL_Texture *p_texture)
     {
-        SDL_RenderCopy(mRenderer, p_texture, NULL, NULL);
+        SDL_RenderCopy(renderer, p_texture, NULL, NULL);
     }
 
     void RenderWindow::renderRectangle(SDL_Rect& p_rect)
     {
-        SDL_RenderFillRect(mRenderer, &p_rect);
+        SDL_RenderFillRect(renderer, &p_rect);
     }
 
     void RenderWindow::display()
     {
-        SDL_RenderPresent(mRenderer);
+        SDL_RenderPresent(renderer);
     }
 
     SDL_Renderer* RenderWindow::getRenderer() {
-        return mRenderer;
+        return renderer;
     }
 }

@@ -16,11 +16,12 @@ namespace Joguinho
 
 	Character::~Character()
 	{
-		std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
+		// std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
 	}
 
 	void Character::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
 	{
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 		SDL_RenderFillRect(renderer, &p_rect);
 	}
 
@@ -56,13 +57,13 @@ namespace Joguinho
 				std::cout << "Up pressed" << std::endl;
 				if (mMoveToLeft)
 				{
-					setVelocity(Vector(-5.0f, -15.0f));
+					setVelocity(Vector(-5.0f, -20.0f));
 					std::cout << "Up to the LEFT" << std::endl;
 				}
 
 				else if (mMoveToRight)
 				{
-					setVelocity(Vector(5.0f, -15.0f));
+					setVelocity(Vector(5.0f, -20.0f));
 					std::cout << "Up to the RIGHT" << std::endl;
 				}
 

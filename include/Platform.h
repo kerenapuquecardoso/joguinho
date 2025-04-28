@@ -1,4 +1,5 @@
 #include "Object.h"
+#pragma once
 namespace Joguinho 
 {
     class Platform : public StaticObject
