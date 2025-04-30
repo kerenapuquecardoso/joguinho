@@ -11,7 +11,8 @@ namespace Joguinho
 	{
 	public:
 		Object(Point position, Vector size, SDL_Texture *texture);
-		virtual void render() = 0;
+
+		virtual void render(SDL_Renderer* renderer, SDL_Rect& p_rect) = 0;
 
 		void setPosition(Point position){
 			mPosition = position;
@@ -24,11 +25,18 @@ namespace Joguinho
 		Vector getSize(){
 			return mSize;
 		}
+		SDL_Texture* getTexture(){
+			return mTexture;
+		}
 
 	protected:
 		Point mPosition;
 		Vector mSize;
 		SDL_Texture *mTexture;
+		SDL_Renderer *mRenderer;
+
+	private:
+		
 	};
 
 	class StaticObject : public Object
@@ -37,7 +45,6 @@ namespace Joguinho
 		StaticObject(const Point position, const Vector size, SDL_Texture *texture)
 			: Object(position, size,  texture) {}
 		virtual ~StaticObject() = default;
-		void render() override;
 	};
 
 	class DynamicObject : public Object
@@ -46,7 +53,6 @@ namespace Joguinho
 		DynamicObject(const Point position, const Vector size, SDL_Texture *texture, const Vector velocity)
 		 : Object(position, size,  texture), mVelocity(velocity) {}
 		virtual ~DynamicObject() = default;
-		void renderer();
 
 		Vector getVelocity() {
 			return mVelocity;

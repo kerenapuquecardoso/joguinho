@@ -3,17 +3,7 @@
 namespace Joguinho
 {
     Object::Object(Point position, Vector size, SDL_Texture* texture)
-        : mPosition(position), mSize(size), mTexture(texture)
+        : mPosition(position), mSize(size), mTexture(texture), mRenderer(NULL)
     {
-    }
-
-    void StaticObject::render()
-    {
-        std::cout << "StaticObject created at position: " << mPosition << std::endl;
-    }
-
-    void DynamicObject::renderer()
-    {
-        std::cout << "DynamicObject created at position: " << mPosition << std::endl;
     }
 }
