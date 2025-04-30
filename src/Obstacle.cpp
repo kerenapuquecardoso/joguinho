@@ -2,14 +2,14 @@
 #include <utility>
 
 #include "VariableGlobal.h"
-#include "Character.h"
+#include "Obstacle.h"
 #include "Object.h"
 
 namespace Joguinho
 
 {
 	Obstacle::Obstacle(Vector position, Vector velocity, Vector size, SDL_Texture *texture)
-		: DynamicObject(position, size, texture, velocity), {}
+		: DynamicObject(position, size, texture, velocity) {}
 
 	Obstacle::~Obstacle()
 	{
