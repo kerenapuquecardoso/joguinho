@@ -7,7 +7,8 @@
 #include "Character.h"
 #include "Object.h"
 #include "Collider.h"
-// #include "VariableGlobal.h"
+#include "VariableGlobal.h"
+#include "GameWorld.h"
 
 int main(int argc, char **argv)
 {
@@ -15,17 +16,34 @@ int main(int argc, char **argv)
     SDL_Event event;
     Joguinho::RenderWindow window("Joguinho", 1280, 720);
 
-
     SDL_Texture *backgroundTexture = window.loadTexture("resources/graphics/image.png");
     SDL_Texture *characterTexture = window.loadTexture("resources/graphics/tom.png");
 
-    Joguinho::Character tom({100, 100}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});
-    
-    std::list<Joguinho::Platform> platforms;
-    platforms.emplace_back(Point{250, 130}, Vector{780, 80}, backgroundTexture);
-    platforms.emplace_back(Point{0, 330}, Vector{780, 100}, backgroundTexture);
-    platforms.emplace_back(Point{0, 550}, Vector{1280, 100}, backgroundTexture);
+    Joguinho::Character tom({100, 600}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});//gw
 
+    const char tile_map[MAP_HEIGHT][MAP_WIDTH + 1] = { //ir para game world
+        "11111111111111111111111111111111",
+        "1..............................1",
+        "1..............................1",
+        "1..............................1",
+        "1111111111111111111111111......1",
+        "1..............................1",
+        "1..............................1",
+        "1...........................1111",
+        "1.......111111111111111111111111",
+        "1..............................1",
+        "1..............................1",
+        "1..............................1",
+        "111111111111111111111111.......1",
+        "1..............................1",
+        "1..............................1",
+        "1..............................1",
+        "1...........................1111",
+        "11111111111111111111111111111111",
+    };
+
+    Joguinho::GameWorld gameWorld;
+    gameWorld.loadPlatformsFromMap(tile_map, characterTexture);
 
     uint32_t currentTime = SDL_GetPerformanceCounter();
     uint32_t lastTime = 0;
@@ -35,48 +53,45 @@ int main(int argc, char **argv)
     {
         lastTime = currentTime;
         currentTime = SDL_GetPerformanceCounter();
-        
+
         float preDeltaTime = float((currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency());
-        float deltaTime = preDeltaTime / 100;   
-        Joguinho::resolveCollision(tom, platforms);
-        
-       
+        deltaTime = preDeltaTime / 100;
+        Joguinho::resolveCollision(tom, gameWorld.mPlatforms);
+
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
             {
                 isRunning = false;
             }
-            
+
             tom.verifyKeyboard(event);
         }
 
-        
         window.clear();
-        std::cout << "DELTA TIME: " << deltaTime << std::endl;
+        // std::cout << "DELTA TIME: " << deltaTime << std::endl;
+
         tom.updateCharacter(deltaTime);
         window.renderBackground(backgroundTexture);
-        for (auto& platform : platforms)
+
+        for (auto &platform : gameWorld.mPlatforms)// gw
         {
-            SDL_Rect plataformRect = {
+            SDL_Rect plataformRect = { 
                 static_cast<int>(platform.getPosition().x),
                 static_cast<int>(platform.getPosition().y),
                 static_cast<int>(platform.getSize().x),
-                static_cast<int>(platform.getSize().y)
-            };
-			platform.render(window.getRenderer(), plataformRect);
+                static_cast<int>(platform.getSize().y)};
+            platform.render(renderer, plataformRect);
         }
         SDL_Rect characterRect = {
             static_cast<int>(tom.getPosition().x),
             static_cast<int>(tom.getPosition().y),
             100,
-            100
-        };
-		tom.render(window.getRenderer(), characterRect);
-        
+            100};
+       
+        tom.render(renderer, characterRect);//gw
         window.display();
-        
-        SDL_Delay(16); 
+        SDL_Delay(16);
     }
 
     window.cleanUp();

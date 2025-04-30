@@ -1,5 +1,15 @@
-#include <SDL2/SDL.h>
+#ifndef VARIABLE_GLOBAL_H
+#define VARIABLE_GLOBAL_H
 
-inline float deltaTime;
-inline const float gravity = 1.0f;
-inline SDL_Renderer *renderer;
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+inline float deltaTime = 0.0f;
+inline SDL_Renderer* renderer  = nullptr;
+
+constexpr float gravity = 9.807f;
+constexpr int TILE_SIZE = 40;
+constexpr int MAP_WIDTH = 1280;
+constexpr int MAP_HEIGHT = 720;
+
+#endif

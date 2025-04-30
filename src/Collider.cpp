@@ -11,6 +11,7 @@ namespace Joguinho
         for (auto &platform : platforms)
         {
             Vector platformPosition = platform.getPosition();
+
             Vector platformSize = platform.getSize();
             if (checkCollider(platform, dynamicObject))
             {
@@ -23,16 +24,16 @@ namespace Joguinho
                     dynamicObject.setVelocity(Vector(dynamicVelocity.x, 0));
                     dynamicObject.setPosition(dynamicPosition);
                 }
-                if (dynamicVelocity.y < 0 &&
-                    dynamicPosition.y <= platformPosition.y + platformSize.y &&
-                    dynamicPosition.y + dynamicSize.y > platformPosition.y)
+                else if (dynamicVelocity.y < 0 &&
+                         dynamicPosition.y <= platformPosition.y + platformSize.y &&
+                         dynamicPosition.y + dynamicSize.y > platformPosition.y)
                 {
-                    // std::cout << "COLIDINDO AQUI Inferior" << std::endl;
-                    dynamicPosition.y = platformPosition.y + dynamicSize.y;
+                    std::cout << "COLIDINDO AQUI Inferior" << std::endl;
+                    dynamicPosition.y = platformPosition.y + platformSize.y;
                     dynamicObject.setVelocity(Vector(dynamicVelocity.x, 0));
                     dynamicObject.setPosition(dynamicPosition);
                 }
-
+                
                 if (dynamicVelocity.x < 0 &&
                     dynamicPosition.x <= platformPosition.x + platformSize.x &&
                     dynamicPosition.x + dynamicSize.x > platformPosition.x + platformSize.x)
@@ -52,8 +53,7 @@ namespace Joguinho
                     dynamicObject.setVelocity(Vector(0, dynamicVelocity.y));
                     dynamicObject.setPosition(dynamicPosition);
                 }
-
-              
+                
             }
         }
     }
