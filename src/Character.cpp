@@ -29,8 +29,8 @@ namespace Joguinho
 	{
 		Vector velocity = getVelocity();
 		Vector position = getPosition();
-		velocity.y += gravity; // * deltaTime
-		position += velocity;  // * deltaTime
+		velocity.y += gravity * deltaTime;
+		position += velocity * deltaTime;
 
 		setVelocity(velocity);
 		setPosition(position);
@@ -44,32 +44,32 @@ namespace Joguinho
 			{
 				mMoveToLeft = true;
 				std::cout << "LEFT pressed" << std::endl;
-				setVelocity(Vector(-5.0f, 0.0f));
+				setVelocity(Vector(-20.0f, 0.0f));
 			}
 			else if (event.key.keysym.sym == mMyKeys[static_cast<int>(Button::Right)])
 			{
 				mMoveToRight = true;
 				std::cout << "RIGHT pressed" << std::endl;
-				setVelocity(Vector(5.0f, 0.0f));
+				setVelocity(Vector(20.0f, 0.0f));
 			}
 			else if (event.key.keysym.sym == mMyKeys[static_cast<int>(Button::Up)])
 			{
 				std::cout << "Up pressed" << std::endl;
 				if (mMoveToLeft)
 				{
-					setVelocity(Vector(-5.0f, -20.0f));
+					setVelocity(Vector(-30.0f, -40.0f));
 					std::cout << "Up to the LEFT" << std::endl;
 				}
 
 				else if (mMoveToRight)
 				{
-					setVelocity(Vector(5.0f, -20.0f));
+					setVelocity(Vector(30.0f, -40.0f));
 					std::cout << "Up to the RIGHT" << std::endl;
 				}
 
 				else
 				{
-					setVelocity(Vector(0.0f, -10.0f));
+					setVelocity(Vector(0.0f, -35.0f));
 					std::cout << "Jumping UP" << std::endl;
 				}
 			}

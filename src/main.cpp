@@ -19,9 +19,9 @@ int main(int argc, char **argv)
     SDL_Texture *backgroundTexture = window.loadTexture("resources/graphics/image.png");
     SDL_Texture *characterTexture = window.loadTexture("resources/graphics/tom.png");
 
-    Joguinho::Character tom({100, 600}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});
+    Joguinho::Character tom({100, 600}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});//gw
 
-    const char tile_map[MAP_HEIGHT][MAP_WIDTH + 1] = {
+    const char tile_map[MAP_HEIGHT][MAP_WIDTH + 1] = { //ir para game world
         "11111111111111111111111111111111",
         "1..............................1",
         "1..............................1",
@@ -74,9 +74,9 @@ int main(int argc, char **argv)
         tom.updateCharacter(deltaTime);
         window.renderBackground(backgroundTexture);
 
-        for (auto &platform : gameWorld.mPlatforms)
+        for (auto &platform : gameWorld.mPlatforms)// gw
         {
-            SDL_Rect plataformRect = {
+            SDL_Rect plataformRect = { 
                 static_cast<int>(platform.getPosition().x),
                 static_cast<int>(platform.getPosition().y),
                 static_cast<int>(platform.getSize().x),
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
             100,
             100};
        
-        tom.render(renderer, characterRect);
+        tom.render(renderer, characterRect);//gw
         window.display();
         SDL_Delay(16);
     }

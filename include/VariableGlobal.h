@@ -7,7 +7,7 @@
 inline float deltaTime = 0.0f;
 inline SDL_Renderer* renderer  = nullptr;
 
-constexpr float gravity = 0.5f;
+constexpr float gravity = 9.807f;
 constexpr int TILE_SIZE = 40;
 constexpr int MAP_WIDTH = 1280;
 constexpr int MAP_HEIGHT = 720;
