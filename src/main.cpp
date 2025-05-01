@@ -71,7 +71,7 @@ int main(int argc, char **argv)
         window.clear();
         // std::cout << "DELTA TIME: " << deltaTime << std::endl;
 
-        tom.updateCharacter(deltaTime);
+        tom.update(deltaTime);
         window.renderBackground(backgroundTexture);
 
         for (auto &platform : gameWorld.mPlatforms)// gw

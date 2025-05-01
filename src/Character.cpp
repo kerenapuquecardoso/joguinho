@@ -25,7 +25,7 @@ namespace Joguinho
 		SDL_RenderFillRect(renderer, &p_rect);
 	}
 
-	void Character::updateCharacter(float deltaTime)
+	void Character::update(float deltaTime)
 	{
 		Vector velocity = getVelocity();
 		Vector position = getPosition();
