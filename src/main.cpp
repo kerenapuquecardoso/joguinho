@@ -56,7 +56,6 @@ int main(int argc, char **argv)
 
         float preDeltaTime = float((currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency());
         deltaTime = preDeltaTime / 100;
-        Joguinho::resolveCollision(tom, gameWorld.mPlatforms);
 
         while (SDL_PollEvent(&event))
         {
@@ -72,6 +71,7 @@ int main(int argc, char **argv)
         // std::cout << "DELTA TIME: " << deltaTime << std::endl;
 
         tom.update(deltaTime);
+		Joguinho::resolveCollision(tom, gameWorld.mPlatforms);
         window.renderBackground(backgroundTexture);
 
         for (auto &platform : gameWorld.mPlatforms)// gw
