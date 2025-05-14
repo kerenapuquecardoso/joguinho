@@ -21,11 +21,23 @@ namespace Joguinho
 
 	void Character::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
 	{
+		Vector pos = getPosition();
+   		Vector size = getSize();
+
+		SDL_Rect rect_debug;
+		rect_debug.x = static_cast<int>(pos.x);
+    	rect_debug.y = static_cast<int>(pos.y);
+    	rect_debug.w = static_cast<int>(size.x);
+    	rect_debug.h = static_cast<int>(size.y);
+
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 		SDL_RenderFillRect(renderer, &p_rect);
+
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderDrawRect(renderer, &rect_debug);
 	}
 
-	void Character::updateCharacter(float deltaTime)
+	void Character::update(float deltaTime)
 	{
 		Vector velocity = getVelocity();
 		Vector position = getPosition();

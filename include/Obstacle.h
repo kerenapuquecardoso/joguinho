@@ -15,6 +15,6 @@ namespace Joguinho
             ~Obstacle();
         
             void render(SDL_Renderer* renderer, SDL_Rect& p_rect) override;
-            void updateObstacle(float deltaTime);
+            void update(float deltaTime) override;
     };
 }

@@ -2,59 +2,63 @@
 
 namespace Joguinho
 {
+	std::pair<bool, Vector> checkCollider(StaticObject &staticObject, DynamicObject &dynamicObject)
+    {
+		Vector staticCenter = staticObject.getPosition() + staticObject.getSize() / 2.0f;
+		Vector dynamicCenter = dynamicObject.getPosition() + dynamicObject.getSize() / 2.0f;
+
+		Vector distance = staticCenter - dynamicCenter;
+        Vector collisionVector;
+        const Vector staticPosition = staticObject.getPosition();
+        const Vector dynamicPosition = dynamicObject.getPosition();
+
+        //const Vector distance = staticPosition - dynamicPosition;
+        const Vector targetDistance = (staticObject.getSize() + dynamicObject.getSize()) / 2.0f;
+        
+        const bool collisionX = std::abs(distance.x) < targetDistance.x;
+        collisionVector.x = std::copysign(targetDistance.x - std::abs(distance.x), distance.x);
+
+        const bool collisionY = std::abs(distance.y) < targetDistance.y;
+        collisionVector.y = std::copysign(targetDistance.y - std::abs(distance.y), distance.y);
+        
+        return std::pair<bool, Vector>(collisionX && collisionY, collisionVector);
+    };
+	
     void resolveCollision(DynamicObject &dynamicObject, std::list<Platform> &platforms)
     {
+        //return;
         Vector dynamicPosition = dynamicObject.getPosition();
         Vector dynamicSize = dynamicObject.getSize();
-        Vector dynamicVelocity = dynamicObject.getVelocity();
+		Vector dynamicVelocity = dynamicObject.getVelocity();
 
         for (auto &platform : platforms)
         {
             Vector platformPosition = platform.getPosition();
-
             Vector platformSize = platform.getSize();
-            if (checkCollider(platform, dynamicObject))
-            {
-                if (dynamicPosition.y > 0 && dynamicVelocity.y > 0 &&
-                    dynamicPosition.y + dynamicSize.y >= platformPosition.y &&
-                    dynamicPosition.y < platformPosition.y + platformSize.y)
-                {
-                    // std::cout << "COLIDINDO AQUI Superior" << std::endl;
-                    dynamicPosition.y = platformPosition.y - dynamicSize.y;
-                    dynamicObject.setVelocity(Vector(dynamicVelocity.x, 0));
-                    dynamicObject.setPosition(dynamicPosition);
-                }
-                else if (dynamicVelocity.y < 0 &&
-                         dynamicPosition.y <= platformPosition.y + platformSize.y &&
-                         dynamicPosition.y + dynamicSize.y > platformPosition.y)
-                {
-                    std::cout << "COLIDINDO AQUI Inferior" << std::endl;
-                    dynamicPosition.y = platformPosition.y + platformSize.y;
-                    dynamicObject.setVelocity(Vector(dynamicVelocity.x, 0));
-                    dynamicObject.setPosition(dynamicPosition);
-                }
-                
-                if (dynamicVelocity.x < 0 &&
-                    dynamicPosition.x <= platformPosition.x + platformSize.x &&
-                    dynamicPosition.x + dynamicSize.x > platformPosition.x + platformSize.x)
-                {
-                    std::cout << "COLISÃO LADO DIREITO DA PLATAFORMA" << std::endl;
-                    dynamicPosition.x = platformPosition.x + platformSize.x;
-                    dynamicObject.setVelocity(Vector(0, dynamicVelocity.y));
-                    dynamicObject.setPosition(dynamicPosition);
-                }
+            const auto [colliding, ds] = checkCollider(platform, dynamicObject);
 
-                if (dynamicVelocity.x > 0 &&
-                    dynamicPosition.x + dynamicSize.x >= platformPosition.x &&
-                    dynamicPosition.x < platformPosition.x)
-                {
-                    std::cout << "COLISÃO LADO ESQUERDO DA PLATAFORMA" << std::endl;
-                    dynamicPosition.x = platformPosition.x - dynamicSize.x;
-                    dynamicObject.setVelocity(Vector(0, dynamicVelocity.y));
-                    dynamicObject.setPosition(dynamicPosition);
-                }
-                
-            }
+			if (colliding)
+			{
+				std::cout << "ds: (" << ds.x << ", " << ds.y << ")\n";
+				Vector pos = dynamicObject.getPosition();
+				//pos = pos + ds;
+				//dynamicObject.setPosition(pos);
+
+				Vector vel = dynamicObject.getVelocity();
+
+				if (std::abs(ds.x) < std::abs(ds.y)) {
+					pos.x += ds.x;
+					vel.x = 0;
+				} else {
+					pos.y += ds.y;
+					vel.y = 0;
+				}
+
+				dynamicObject.setPosition(pos);
+				dynamicObject.setVelocity(vel);
+				std::cout << "COLISÃO" << std::endl;
+				break;
+			}
         }
     }
 }

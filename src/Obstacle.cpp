@@ -21,7 +21,7 @@ namespace Joguinho
 		SDL_RenderCopy(renderer, mTexture, nullptr, &p_rect);
 	}
 
-	void Obstacle::updateObstacle(float deltaTime)
+	void Obstacle::update(float deltaTime)
 	{
 		Vector velocity = getVelocity();
 		Vector position = getPosition();

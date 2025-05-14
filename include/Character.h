@@ -23,7 +23,7 @@ namespace Joguinho
 			std::array<SDL_Keycode, 3> myKeys); 
         ~Character();
         void render(SDL_Renderer* renderer, SDL_Rect& p_rect);
-        void updateCharacter(float deltaTime);
+        void update(float deltaTime) override;
         void verifyKeyboard(SDL_Event& event);
 
     protected:
