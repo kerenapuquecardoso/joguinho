@@ -13,7 +13,8 @@ namespace Joguinho
     public:
         GameWorld();
         ~GameWorld();
-        void loadPlatformsFromMap(const char tiles[MAP_HEIGHT][MAP_WIDTH + 1], SDL_Texture *texture);
+        const char (*chooseTileMap(int i))[MAP_WIDTH + 1];
+        void loadPlatformsFromMap(int i, SDL_Texture *texture);
         std::list<Platform> mPlatforms;
     };
 }
