@@ -5,7 +5,6 @@
 #include "Character.h"
 #include "Object.h"
 
-
 namespace Joguinho
 
 {
@@ -19,22 +18,15 @@ namespace Joguinho
 		// std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
 	}
 
-	void Character::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
+	void Character::render(SDL_Renderer *renderer)
 	{
-		Vector pos = getPosition();
-   		Vector size = getSize();
+		Vector dynamicPosition = getPosition();
+		Vector size = getSize();
+		
+		SDL_Rect dynamicRect = {dynamicPosition.x - size.x / 2, dynamicPosition.y - size.y / 2, size.x, size.y};
 
-		SDL_Rect rect_debug;
-		rect_debug.x = static_cast<int>(pos.x);
-    	rect_debug.y = static_cast<int>(pos.y);
-    	rect_debug.w = static_cast<int>(size.x);
-    	rect_debug.h = static_cast<int>(size.y);
-
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(renderer, &p_rect);
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderDrawRect(renderer, &rect_debug);
+//		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//		SDL_RenderFillRect(renderer, &dynamicRect);
 	}
 
 	void Character::update(float deltaTime)
@@ -56,20 +48,20 @@ namespace Joguinho
 			{
 				mMoveToLeft = true;
 				std::cout << "LEFT pressed" << std::endl;
-				setVelocity(Vector(-20.0f, 0.0f));
+				setVelocity(Vector(-100.0f, 0.0f));
 			}
 			else if (event.key.keysym.sym == mMyKeys[static_cast<int>(Button::Right)])
 			{
 				mMoveToRight = true;
 				std::cout << "RIGHT pressed" << std::endl;
-				setVelocity(Vector(20.0f, 0.0f));
+				setVelocity(Vector(100.0f, 0.0f));
 			}
 			else if (event.key.keysym.sym == mMyKeys[static_cast<int>(Button::Up)])
 			{
 				std::cout << "Up pressed" << std::endl;
 				if (mMoveToLeft)
 				{
-					setVelocity(Vector(-30.0f, -40.0f));
+					setVelocity(Vector(-30.0f, -2000.0f));
 					std::cout << "Up to the LEFT" << std::endl;
 				}
 
@@ -81,7 +73,7 @@ namespace Joguinho
 
 				else
 				{
-					setVelocity(Vector(0.0f, -35.0f));
+					setVelocity(Vector(0.0f, -350.0f));
 					std::cout << "Jumping UP" << std::endl;
 				}
 			}

@@ -19,22 +19,23 @@ int main(int argc, char **argv)
     SDL_Texture *backgroundTexture = window.loadTexture("resources/graphics/image.png");
     SDL_Texture *characterTexture = window.loadTexture("resources/graphics/tom.png");
 
-    Joguinho::Character tom({100, 600}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});//gw
+    Joguinho::Character tom({200, 300}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});//gw
 
     Joguinho::GameWorld gameWorld;
-    gameWorld.loadPlatformsFromMap(1, characterTexture);
+    gameWorld.loadPlatformsFromMap(2, characterTexture);
 
-    uint32_t currentTime = SDL_GetPerformanceCounter();
-    uint32_t lastTime = 0;
+    uint32_t lastTime = SDL_GetTicks();
 
     bool isRunning = true;
     while (isRunning)
     {
-        lastTime = currentTime;
-        currentTime = SDL_GetPerformanceCounter();
+        uint32_t currentTime = SDL_GetTicks();
 
-        float preDeltaTime = float((currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency());
-        deltaTime = preDeltaTime / 100;
+        float preDeltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+        deltaTime = static_cast<float>(preDeltaTime) / 1000.0f;
+
+		std::cout << "DELTA TIME: " << deltaTime << std::endl;
 
         while (SDL_PollEvent(&event))
         {
@@ -50,27 +51,17 @@ int main(int argc, char **argv)
         // std::cout << "DELTA TIME: " << deltaTime << std::endl;
 
         tom.update(deltaTime);
-		Joguinho::resolveCollision(tom, gameWorld.mPlatforms);
         window.renderBackground(backgroundTexture);
-
+		Joguinho::resolveCollision(tom, gameWorld.mPlatforms);
+        
         for (auto &platform : gameWorld.mPlatforms)// gw
         {
-            SDL_Rect plataformRect = { 
-                static_cast<int>(platform.getPosition().x),
-                static_cast<int>(platform.getPosition().y),
-                static_cast<int>(platform.getSize().x),
-                static_cast<int>(platform.getSize().y)};
-            platform.render(renderer, plataformRect);
+            platform.render(renderer);
         }
-        SDL_Rect characterRect = {
-            static_cast<int>(tom.getPosition().x),
-            static_cast<int>(tom.getPosition().y),
-            100,
-            100};
-       
-        tom.render(renderer, characterRect);//gw
+        
+        tom.render(renderer);//gw
         window.display();
-        SDL_Delay(16);
+        SDL_Delay(20);
     }
 
     window.cleanUp();

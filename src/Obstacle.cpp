@@ -16,9 +16,19 @@ namespace Joguinho
 		std::cout << "LIMPAR VARIAVEIS AQUI" << std::endl;
 	}
 
-	void Obstacle::render(SDL_Renderer* renderer, SDL_Rect& p_rect)
+	void Obstacle::render(SDL_Renderer *renderer)
 	{
-		SDL_RenderCopy(renderer, mTexture, nullptr, &p_rect);
+		Vector pos = getPosition();
+		Vector size = getSize();
+		Vector center = pos + size / 2.0f;
+
+		SDL_Rect rect;
+		rect.w = static_cast<int>(size.x);
+		rect.h = static_cast<int>(size.y);
+		rect.x = static_cast<int>(center.x - size.x / 2);
+		rect.y = static_cast<int>(center.y - size.y / 2);
+
+		SDL_RenderCopy(renderer, mTexture, nullptr, &rect);
 	}
 
 	void Obstacle::update(float deltaTime)
