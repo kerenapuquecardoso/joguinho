@@ -12,7 +12,7 @@ namespace Joguinho
 	public:
 		Object(Point position, Vector size, SDL_Texture *texture);
 
-		virtual void render(SDL_Renderer* renderer, SDL_Rect& p_rect) = 0;
+		virtual void render(SDL_Renderer* renderer) = 0;
 
 		void setPosition(Point position){
 			mPosition = position;

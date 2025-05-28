@@ -14,7 +14,7 @@ namespace Joguinho
                 SDL_Texture* texture);
             ~Obstacle();
         
-            void render(SDL_Renderer* renderer, SDL_Rect& p_rect) override;
+            void render(SDL_Renderer* renderer) override;
             void update(float deltaTime) override;
     };
 }
