@@ -10,6 +10,8 @@
 #include "VariableGlobal.h"
 #include "GameWorld.h"
 
+#include "GameManager.h"
+
 int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -22,7 +24,7 @@ int main(int argc, char **argv)
     Joguinho::Character tom({200, 300}, {0, 0}, {100, 100}, characterTexture, {SDLK_LEFT, SDLK_RIGHT, SDLK_UP});//gw
 
     Joguinho::GameWorld gameWorld;
-    gameWorld.loadPlatformsFromMap(2, characterTexture);
+    gameWorld.loadPlatformsFromMap(1, characterTexture);
 
     uint32_t lastTime = SDL_GetTicks();
 
